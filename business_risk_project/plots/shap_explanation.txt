@@ -1,0 +1,33 @@
+=== SHAP Feature Importance Explanation ===
+
+--- Global Feature Importance ---
+This ranks features by their average absolute impact on the model's output across all testing samples.
+- Employee_count: 2.5976
+- Gst_compliance_score: 1.6718
+- Asset_value: 1.4897
+- Monthly_Inflow: 1.1115
+- Ecommerce_sales: 0.6148
+- Supplier_payments: 0.5309
+- Monthly_Outflow: 0.5257
+- Business_age: 0.4016
+- Invoice_issued: 0.2363
+- Invoice_amount: 0.1952
+- Business_size: 0.0000
+
+--- Local Feature Importance (First Instance) ---
+This explains the prediction for the first specific instance in the test set, corresponding to the Waterfall and Force plots.
+Base Value (Average model output): 0.0055
+Predicted Value (Instance output): 4.8834
+
+Feature Contributions for this instance:
+- Employee_count: +2.5873
+- Asset_value: -2.0129
+- Gst_compliance_score: +1.1991
+- Ecommerce_sales: +0.8490
+- Supplier_payments: +0.8402
+- Monthly_Inflow: +0.8383
+- Monthly_Outflow: +0.7288
+- Invoice_amount: -0.2162
+- Business_age: +0.0333
+- Invoice_issued: +0.0309
+- Business_size: +0.0000

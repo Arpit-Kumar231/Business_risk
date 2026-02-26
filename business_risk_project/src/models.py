@@ -7,12 +7,14 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
 from tensorflow.keras.callbacks import EarlyStopping
 
-def train_evaluate_models(X_train, y_train, X_test, y_test):
+def train_evaluate_models(X_train, y_train, X_test, y_test, return_models=False):
     """
     Trains and evaluates multiple models.
     Returns a DataFrame with performance metrics.
+    If return_models=True, returns (results_df, models_dict).
     """
     results = []
+    models_dict = {}
     
     # --- 1. Random Forest Classifier ---
     print("\nTraining Random Forest Classifier...")
@@ -21,6 +23,7 @@ def train_evaluate_models(X_train, y_train, X_test, y_test):
     rf_pred = rf_model.predict(X_test)
     rf_prob = rf_model.predict_proba(X_test)[:, 1]
     results.append(evaluate("Random Forest", y_test, rf_pred, rf_prob))
+    models_dict["Random Forest"] = rf_model
     
     # --- 2. Gradient Boosting Classifier ---
     print("Training Gradient Boosting Classifier...")
@@ -29,6 +32,7 @@ def train_evaluate_models(X_train, y_train, X_test, y_test):
     gb_pred = gb_model.predict(X_test)
     gb_prob = gb_model.predict_proba(X_test)[:, 1]
     results.append(evaluate("Gradient Boosting", y_test, gb_pred, gb_prob))
+    models_dict["Gradient Boosting"] = gb_model
     
     # --- 3. XGBoost Classifier ---
     print("Training XGBoost Classifier...")
@@ -47,6 +51,7 @@ def train_evaluate_models(X_train, y_train, X_test, y_test):
     xgb_pred = xgb_model.predict(X_test)
     xgb_prob = xgb_model.predict_proba(X_test)[:, 1]
     results.append(evaluate("XGBoost", y_test, xgb_pred, xgb_prob))
+    models_dict["XGBoost"] = xgb_model
     
     # --- 4. MLP Classifier (Keras) ---
     print("Training MLP (Deep Learning)...")
@@ -75,8 +80,12 @@ def train_evaluate_models(X_train, y_train, X_test, y_test):
     mlp_prob = mlp_model.predict(X_test).flatten()
     mlp_pred = (mlp_prob > 0.5).astype(int)
     results.append(evaluate("MLP (Deep Learning)", y_test, mlp_pred, mlp_prob))
+    models_dict["MLP (Deep Learning)"] = mlp_model
     
-    return pd.DataFrame(results).sort_values(by="ROC-AUC", ascending=False)
+    results_df = pd.DataFrame(results).sort_values(by="ROC-AUC", ascending=False)
+    if return_models:
+        return results_df, models_dict
+    return results_df
 
 def build_mlp(input_dim):
     model = Sequential([

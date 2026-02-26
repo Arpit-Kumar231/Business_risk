@@ -1,7 +1,7 @@
 import os
 import sys
 
-# Add project root to path
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from src.data_loader import load_data
@@ -17,28 +17,28 @@ def main():
     
     print("=== SME Business Risk Assessment Pipeline ===\n")
     
-    # 2. Load Data
+    
     try:
         df = load_data(data_path)
     except FileNotFoundError as e:
         print(f"Error: {e}")
         return
 
-    # 3. Preprocessing
+   
     preprocessor = DataPreprocessor()
     df = preprocessor.derive_risk(df)
     
-    # Split and Scale
+    
     X_train_scaled, X_test_scaled, y_train, y_test = preprocessor.preprocess(df)
     
     print(f"\nTraining set shape: {X_train_scaled.shape}")
     print(f"Test set shape: {X_test_scaled.shape}")
     
-    # 4. Model Training & Evaluation
+   
     print("\nStarting Model Training...")
     results_df = train_evaluate_models(X_train_scaled, y_train, X_test_scaled, y_test)
     
-    # 5. Visualization
+    
     print("\nGenerating Visualizations...")
     plot_model_comparison(results_df, plots_dir)
     
