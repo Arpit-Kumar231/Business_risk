@@ -2,32 +2,32 @@
 
 --- Global Feature Importance ---
 This ranks features by their average absolute impact on the model's output across all testing samples.
-- Employee_count: 2.5976
-- Gst_compliance_score: 1.6718
-- Asset_value: 1.4897
-- Monthly_Inflow: 1.1115
-- Ecommerce_sales: 0.6148
-- Supplier_payments: 0.5309
-- Monthly_Outflow: 0.5257
-- Business_age: 0.4016
-- Invoice_issued: 0.2363
-- Invoice_amount: 0.1952
-- Business_size: 0.0000
+- Employee_count: 1.7675
+- Monthly_Inflow: 1.4970
+- Asset_value: 1.0931
+- Gst_compliance_score: 0.7666
+- Business_size: 0.7493
+- Monthly_Outflow: 0.4627
+- Business_age: 0.4621
+- Ecommerce_sales: 0.3712
+- Supplier_payments: 0.1864
+- Invoice_issued: 0.1507
+- Invoice_amount: 0.0832
 
 --- Local Feature Importance (First Instance) ---
 This explains the prediction for the first specific instance in the test set, corresponding to the Waterfall and Force plots.
-Base Value (Average model output): 0.0055
-Predicted Value (Instance output): 4.8834
+Base Value (Average model output): 0.0066
+Predicted Value (Instance output): -5.8161
 
 Feature Contributions for this instance:
-- Employee_count: +2.5873
-- Asset_value: -2.0129
-- Gst_compliance_score: +1.1991
-- Ecommerce_sales: +0.8490
-- Supplier_payments: +0.8402
-- Monthly_Inflow: +0.8383
-- Monthly_Outflow: +0.7288
-- Invoice_amount: -0.2162
-- Business_age: +0.0333
-- Invoice_issued: +0.0309
-- Business_size: +0.0000
+- Business_size: -2.7608
+- Employee_count: -1.5656
+- Monthly_Inflow: -1.0199
+- Supplier_payments: +0.7261
+- Monthly_Outflow: +0.7010
+- Asset_value: -0.5995
+- Ecommerce_sales: -0.5505
+- Business_age: -0.3666
+- Gst_compliance_score: -0.3428
+- Invoice_issued: -0.1968
+- Invoice_amount: +0.1526
