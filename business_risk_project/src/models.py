@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
 from tensorflow.keras.callbacks import EarlyStopping
+from agent_model import AgentBasedClassifier
 
 def train_evaluate_models(X_train, y_train, X_test, y_test, return_models=False):
     """
@@ -81,6 +82,15 @@ def train_evaluate_models(X_train, y_train, X_test, y_test, return_models=False)
     mlp_pred = (mlp_prob > 0.5).astype(int)
     results.append(evaluate("MLP (Deep Learning)", y_test, mlp_pred, mlp_prob))
     models_dict["MLP (Deep Learning)"] = mlp_model
+    
+    # --- 5. AI Agent-Based Classifier (Novel Approach) ---
+    print("Training AI Agent-Based Classifier (Novelty Model)...")
+    agent_model = AgentBasedClassifier(n_sub_agents=5, reasoning_depth='deep', adaptive=True)
+    agent_model.fit(X_train, y_train)
+    agent_pred = agent_model.predict(X_test)
+    agent_prob = agent_model.predict_proba(X_test)[:, 1]
+    results.append(evaluate("AI Agent", y_test, agent_pred, agent_prob))
+    models_dict["AI Agent"] = agent_model
     
     results_df = pd.DataFrame(results).sort_values(by="ROC-AUC", ascending=False)
     if return_models:
